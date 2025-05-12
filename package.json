@@ -39,12 +39,13 @@
   },
   "build": {
     "appId": "com.scientific.calculator",
-    "productName": "Scientific Calculator",
+    "productName": "OMKAR-SC",
     "directories": {
       "output": "dist-electron"
     },
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "artifactName": "OMKAR-SC-Setup.${ext}"
     },
     "files": [
       "dist/**/*",
