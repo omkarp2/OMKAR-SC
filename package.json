@@ -13,11 +13,12 @@
     "electron:build": "tsc && vite build && electron-builder"
   },
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "caniuse-lite": "^1.0.30001717",
+    "electron": "^29.1.4",
     "lucide-react": "^0.344.0",
     "mathjs": "^12.4.0",
-    "electron": "^29.1.4"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
