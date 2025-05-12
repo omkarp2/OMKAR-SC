@@ -13,7 +13,6 @@
     "electron:build": "tsc && vite build && electron-builder"
   },
   "dependencies": {
-    "caniuse-lite": "^1.0.30001717",
     "electron": "^29.1.4",
     "lucide-react": "^0.344.0",
     "mathjs": "^12.4.0",
