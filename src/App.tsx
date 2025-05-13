@@ -22,8 +22,18 @@ function App() {
     setDisplay('0');
   };
 
+  // For trigonometric functions, the input will be interpreted based on isRadians
   const handleFunction = (func: string) => {
-    setExpression(expression + func + '(');
+    // Trigonometric functions that need angle mode handling
+    const trigFunctions = ['sin', 'cos', 'tan', 'asin', 'acos', 'atan'];
+    
+    if (trigFunctions.includes(func)) {
+      // The scope in calculate() will handle the conversion automatically
+      setExpression(expression + func + '(');
+    } else {
+      // Non-trigonometric functions don't need angle handling
+      setExpression(expression + func + '(');
+    }
     setDisplay('0');
   };
 
@@ -35,12 +45,21 @@ function App() {
   const calculate = () => {
     try {
       // Create a scope with angle mode setting
+      // When deg: true, mathjs will convert degrees to radians internally
+      // When deg: false, mathjs will use radians directly
       const scope = {
         deg: !isRadians
       };
+      
       const result = math.evaluate(expression, scope);
-      setDisplay(result.toString());
-      setExpression(result.toString());
+      
+      // Format the result to avoid excessive decimal places
+      const formattedResult = typeof result === 'number' 
+        ? Number(result.toPrecision(10)).toString()
+        : result.toString();
+      
+      setDisplay(formattedResult);
+      setExpression(formattedResult);
     } catch (error) {
       setDisplay('Error');
       setExpression('');
@@ -78,7 +97,11 @@ function App() {
             <div className="flex justify-between items-center mb-2">
               <button
                 onClick={() => setIsRadians(!isRadians)}
-                className="text-sm bg-gray-700 px-2 py-1 rounded"
+                className={`text-sm px-2 py-1 rounded ${
+                  isRadians 
+                    ? 'bg-blue-600 hover:bg-blue-700' 
+                    : 'bg-gray-700 hover:bg-gray-600'
+                }`}
               >
                 {isRadians ? 'RAD' : 'DEG'}
               </button>
